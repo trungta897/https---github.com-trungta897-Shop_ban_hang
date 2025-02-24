@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductComment;
+use App\Models\ProductImages;
+use App\Models\Products;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,9 +19,90 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::factory()->create([[
+            'id' => 1,
+            'role' => 'buyer',
+            'username' => 'trungta897',
+            'email' => 'nguyentatrunghieu2@gmail.com',
+            'password' => Hash::make('Trungta897@'),
+            'phone' => '0837791414',
+            'address' => 'Hanoi, Vietnam',
+            'avatar' => 'avatar.jpg',
+        ],
+        [
+            'id' => 2,
+            'role' => 'seller',
+            'username' => 'root',
+            'email' => 'hieunguyentatrung@gmail.com',
+            'password' => Hash::make('Asdasdasdasasda1@'),
+            'phone' => '0837791414',
+            'address' => 'Hanoi, Vietnam',
+            'avatar' => 'avatar2.jpg',
+        ]
         ]);
+
+        Products::factory()->create([[
+
+
+            'id' => 1,
+            'name' => 'Điện thoại Samsung Galaxy A34 5G 8GB/256GB',
+            'price' => 8000500,
+            'image' => 'product-2.jpg',
+            'detail' => 'dien thoai sam  sung a34',
+            'category' => 'Điện thoại',
+        ],
+        [
+            'id' => 2,
+            'name' => 'Laptop HP 14s-dq5121TU i3 1215U/8GB/512GB/14inch;FHD/Win11',
+            'price' => 16000000,
+            'image' => '2022_12_7_638060331277536556_hp-14s-dq-bac-1.jpg',
+            'detail' => 'asdasdasdasdasdasd',
+            'category' => 'Laptop',
+        ],
+        [
+            'id' => 3,
+            'name' => 'Điện thoại Samsung Galaxy A34 5G 8GB/256GB',
+            'price' => 8000500,
+            'image' => 'product-2.jpg',
+            'detail' => 'dien thoai sam  sung a34',
+            'category' => 'Điện thoại',
+        ],
+        [
+            'id' => 4,
+            'name' => 'Điện thoại Samsung Galaxy A34 5G 8GB/256GB',
+            'price' => 8000500,
+            'image' => 'product-2.jpg',
+            'detail' => 'dien thoai sam  sung a34',
+            'category' => 'Điện thoại',
+        ]
+        ]);
+
+        ProductImages::factory()->create([[
+            'id' => 1,
+            'product_id' => 1,
+            'image' => 'product-2.jpg',
+        ],
+        [
+            'id' => 2,
+            'product_id' => 2,
+            'image' => '2022_12_7_638060331277536556_hp-14s-dq-bac-1.jpg',
+        ],
+        [
+            'id' => 3,
+            'product_id' => 3,
+            'image' => 'product-2.jpg',
+        ],
+        [
+            'id' => 4,
+            'product_id' => 4,
+            'image' => 'product-2.jpg',
+        ]
+        ]);
+
+        // ProductComment::factory()->createe([[
+        //     'product_id'=> 1,
+        //     'user_id'=> 1,
+        // ]]);
+
     }
 }
