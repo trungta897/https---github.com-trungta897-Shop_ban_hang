@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([[
+        User::insert([[
             'id' => 1,
             'role' => 'buyer',
             'username' => 'trungta897',
@@ -41,11 +41,10 @@ class DatabaseSeeder extends Seeder
         ]
         ]);
 
-        Products::factory()->create([[
-
-
+        Products::insert([[
             'id' => 1,
             'name' => 'Điện thoại Samsung Galaxy A34 5G 8GB/256GB',
+            'brand_id' => 1,
             'price' => 8000500,
             'image' => 'product-2.jpg',
             'detail' => 'dien thoai sam  sung a34',
@@ -54,6 +53,7 @@ class DatabaseSeeder extends Seeder
         [
             'id' => 2,
             'name' => 'Laptop HP 14s-dq5121TU i3 1215U/8GB/512GB/14inch;FHD/Win11',
+            'brand_id' => 2,
             'price' => 16000000,
             'image' => '2022_12_7_638060331277536556_hp-14s-dq-bac-1.jpg',
             'detail' => 'asdasdasdasdasdasd',
@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
         [
             'id' => 3,
             'name' => 'Điện thoại Samsung Galaxy A34 5G 8GB/256GB',
+            'brand_id' => 1,
             'price' => 8000500,
             'image' => 'product-2.jpg',
             'detail' => 'dien thoai sam  sung a34',
@@ -70,6 +71,7 @@ class DatabaseSeeder extends Seeder
         [
             'id' => 4,
             'name' => 'Điện thoại Samsung Galaxy A34 5G 8GB/256GB',
+            'brand_id' => 1,
             'price' => 8000500,
             'image' => 'product-2.jpg',
             'detail' => 'dien thoai sam  sung a34',
@@ -77,7 +79,7 @@ class DatabaseSeeder extends Seeder
         ]
         ]);
 
-        ProductImages::factory()->create([[
+        ProductImages::insert([[
             'id' => 1,
             'product_id' => 1,
             'image' => 'product-2.jpg',
