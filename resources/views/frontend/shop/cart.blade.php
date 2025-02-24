@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index.html">e<span>Electronics</span></a></h1>
+                        <h1><a href="{{url('/')}}">e<span>Electronics</span></a></h1>
                     </div>
                 </div>
 
@@ -78,28 +78,28 @@
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Products</h2>
                         <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <img src="frontend/img/product-thumb-1.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
                             </div>
                         </div>
                         <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <img src="frontend/img/product-thumb-1.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
                             </div>
                         </div>
                         <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <img src="frontend/img/product-thumb-1.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
                             </div>
                         </div>
                         <div class="thubmnail-recent">
-                            <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
+                            <img src="frontend/img/product-thumb-1.jpg" class="recent-thumb" alt="">
                             <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
@@ -141,7 +141,7 @@
                                             </td>
 
                                             <td class="product-thumbnail">
-                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/product-thumb-2.jpg"></a>
+                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="frontend/img/product-thumb-2.jpg"></a>
                                             </td>
 
                                             <td class="product-name">
@@ -187,7 +187,7 @@
                                 <ul class="products">
                                     <li class="product">
                                         <a href="single-product.html">
-                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-2.jpg">
+                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="frontend/img/product-2.jpg">
                                             <h3>Ship Your Idea</h3>
                                             <span class="price"><span class="amount">£20.00</span></span>
                                         </a>
@@ -197,7 +197,7 @@
 
                                     <li class="product">
                                         <a href="single-product.html">
-                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="img/product-4.jpg">
+                                            <img width="325" height="325" alt="T_4_front" class="attachment-shop_catalog wp-post-image" src="frontend/img/product-4.jpg">
                                             <h3>Ship Your Idea</h3>
                                             <span class="price"><span class="amount">£20.00</span></span>
                                         </a>
