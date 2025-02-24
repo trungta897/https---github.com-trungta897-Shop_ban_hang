@@ -13,6 +13,10 @@ return new class extends Migration {
             $table->string('username', 50)->unique();
             $table->string('email', 100)->unique();
             $table->string('password');
+            $table->string('phone', 15)->nullable();
+            $table->string('address')->nullable();
+            $table->string('avatar')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

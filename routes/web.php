@@ -1,8 +1,13 @@
 <?php
 
+
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\SingleProductController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,6 +19,17 @@ Route::get('/shop', [ShopController::class, 'show'])->name('shopShow');
 Route::get('/shop/product/{id}', [SingleProductController::class, 'show'])->name('singleProductShow');
 
 Route::post('/shop/product/{id}',[SingleProductController::class, 'postComment'] )->name('postComment');
+
+Route::get('/cart', [CartController::class, 'show'])->name('cartShow');
+
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkoutShow');
+
+
+
+
+
+
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

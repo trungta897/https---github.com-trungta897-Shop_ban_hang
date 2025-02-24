@@ -78,7 +78,7 @@
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Products</h2>
                         <div class="thubmnail-recent">
-                            <img src="frontend/img/products/{{$products->productImages[0]->path}} class="recent-thumb" alt="">
+                            <img src="frontend/img/products/{{$products->productImages[0]->image}} class="recent-thumb" alt="">
                             <h2><a href="">Sony Smart TV - 2015</a></h2>
                             <div class="product-sidebar-price">
                                 <ins>$700.00</ins> <del>$800.00</del>
@@ -131,7 +131,7 @@
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="frontend/img/product-2.jpg" alt="">
+                                        <img src="{{$products->image}}" alt="">
                                     </div>
 
                                     <div class="product-gallery">

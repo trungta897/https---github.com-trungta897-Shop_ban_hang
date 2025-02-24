@@ -4,24 +4,35 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateProductCommentsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('product_comments', function (Blueprint $table) {
             $table->id();
+
+            $table->integer('product_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->string('email',191);
+            $table->string('name',191);
+            $table->string('message',191);
+            $table->integer('rating')->unsigned();
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('product_comments');
     }
-};
+}
