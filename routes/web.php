@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\SingleProductController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\CategoryController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +25,7 @@ Route::get('/cart', [CartController::class, 'show'])->name('cartShow');
 
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkoutShow');
 
-
+Route::get('/category', [CategoryController::class, 'showCategory'])->name('categoryShow');
 
 
 
