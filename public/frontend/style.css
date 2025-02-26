@@ -149,7 +149,7 @@ z-index: 999;}
     padding: 20px;
 }
 
-.mainmenu-area ul.navbar-nav li:hover a, .mainmenu-area ul.navbar-nav li.active a {background: #222}
+.mainmenu-area ul.navbar-nav li:hover a{background: #222}
 .mainmenu-area .nav > li > a:focus {color: #000}
 
 .slider-area {clear: both}
