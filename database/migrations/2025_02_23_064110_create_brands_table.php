@@ -8,10 +8,11 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('brands', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('name', 100)->unique();
             $table->text('description')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('logo', 100)->nullable();
             $table->timestamps();
         });
     }

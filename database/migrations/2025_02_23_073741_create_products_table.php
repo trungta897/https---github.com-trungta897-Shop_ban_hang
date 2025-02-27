@@ -9,15 +9,20 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
+            $table->unsignedBigInteger('brand_id')->nullable();
             $table->string('name', 100);
             $table->decimal('price', 15, 2);
             $table->string('image')->nullable();
             $table->string('category', 50)->nullable();
             $table->text('detail')->nullable();
             $table->timestamps();
+
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
         });
     }
+
 
     public function down()
     {

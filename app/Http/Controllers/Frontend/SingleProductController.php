@@ -25,8 +25,9 @@ class SingleProductController extends Controller
     public function show($id) {
 
         $products = $this->productService->find($id);
+        $relatedProducts = $this->productService->getRealatedProducts($products, 5);
 
-        return view('frontend.shop.single-product', compact('products'));
+        return view('frontend.shop.single-product', compact('products', 'relatedProducts'));
     }
 
     public function postComment(Request $request) {

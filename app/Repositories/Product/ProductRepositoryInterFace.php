@@ -5,5 +5,5 @@ use App\Repositories\RepositoriesInterFace;
 
 interface ProductRepositoryInterFace extends RepositoriesInterFace
 {
-
+    public function getRealatedProduct($product, $limit = 5);
 }

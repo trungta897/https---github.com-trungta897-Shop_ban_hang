@@ -42,6 +42,20 @@ class DatabaseSeeder extends Seeder
         ]
         ]);
 
+        Brands::insert([[
+            'id' => 1,
+            'name' => 'Samsung',
+            'description' => 'Samsung',
+            'logo' => 'samsung.jpg',
+        ],
+        [
+            'id' => 2,
+            'name' => 'HP',
+            'description' => 'HP',
+            'logo' => 'hp.jpg',
+        ]
+        ]);
+
         Products::insert([[
             'id' => 1,
             'name' => 'Điện thoại Samsung Galaxy A34 5G 8GB/256GB',
@@ -102,18 +116,5 @@ class DatabaseSeeder extends Seeder
         ]
         ]);
 
-        Brands::insert([[
-            'id' => 1,
-            'name' => 'Samsung',
-            'description' => 'Samsung',
-            'logo' => 'samsung.jpg',
-        ],
-        [
-            'id' => 2,
-            'name' => 'HP',
-            'description' => 'HP',
-            'logo' => 'hp.jpg',
-        ]
-        ]);
     }
 }

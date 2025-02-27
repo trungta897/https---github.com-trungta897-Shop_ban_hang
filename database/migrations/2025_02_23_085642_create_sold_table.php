@@ -12,18 +12,16 @@ return new class extends Migration
     public function up()
 {
     Schema::create('sold', function (Blueprint $table) {
+        $table->engine = 'InnoDB';
         $table->id();
-        $table->foreignId('product_id')
-              ->nullable()
-              ->constrained('products')
-              ->onDelete('set null');
-        $table->foreignId('seller_id')
-              ->nullable()
-              ->constrained('sellers')
-              ->onDelete('set null');
+        $table->unsignedBigInteger('product_id')->nullable();
+        $table->unsignedBigInteger('seller_id')->nullable();
         $table->string('product_name');
         $table->integer('quantity_sold');
         $table->timestamps();
+
+        $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
+        $table->foreign('seller_id')->references('id')->on('users')->onDelete('set null');
     });
 }
 

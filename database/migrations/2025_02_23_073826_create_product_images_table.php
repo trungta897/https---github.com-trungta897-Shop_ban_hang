@@ -9,12 +9,13 @@ return new class extends Migration {
     public function up()
 {
     Schema::create('product_images', function (Blueprint $table) {
+        $table->engine = 'InnoDB';
         $table->id();
-        $table->foreignId('product_id')
-              ->constrained('products') // Tham chiếu đến bảng products
-              ->onDelete('cascade');     // Xóa ảnh khi product bị xóa
+        $table->unsignedBigInteger('product_id');
         $table->string('image');
         $table->timestamps();
+
+        $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
     });
 }
 
