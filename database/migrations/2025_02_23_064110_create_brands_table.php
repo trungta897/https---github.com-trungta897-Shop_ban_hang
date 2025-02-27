@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('name', 100)->unique();
             $table->text('description')->nullable();
             $table->string('logo', 100)->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

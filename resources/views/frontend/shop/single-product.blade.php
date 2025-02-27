@@ -29,72 +29,29 @@
                             <input type="submit" value="Search">
                         </form>
                     </div>
-
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Products</h2>
-                        <div class="thubmnail-recent">
-                            <img src="frontend/img/products/{{$products->productImages[0]->image}} class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="frontend/img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="frontend/img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                        <div class="thubmnail-recent">
-                            <img src="frontend/img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                            <h2><a href="">Sony Smart TV - 2015</a></h2>
-                            <div class="product-sidebar-price">
-                                <ins>$700.00</ins> <del>$800.00</del>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="single-sidebar">
-                        <h2 class="sidebar-title">Recent Posts</h2>
-                        <ul>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                            <li><a href="">Sony Smart TV - 2015</a></li>
-                        </ul>
-                    </div>
                 </div>
 
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
-                            <a href="{{url('/')}}">Home</a>
-                            <a href="">{{$products->category}}</a>
-                            <a href="shop/product/{{$products->id}}">{{$products->name}}</a>
+                            <a href="{{ url('/') }}">Home</a>
+                            <a href="">{{ $products->category }}</a>
+                            <a href="shop/product/{{ $products->id }}">{{ $products->name }}</a>
                         </div>
 
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="{{$products->image}}" alt="">
+                                        <img src="{{ $products->image}}" alt="">
                                     </div>
 
                                     <div class="product-gallery">
 
                                         @foreach ($products->productImages as $productImage)
-                                        <div class="pt active" data-imgbigurl="frontend/img/{{$productImage->path}}">
-                                            <img src="frontend/img/{{$productImage->path}}" alt="">
-                                        </div>
+                                            <div class="pt active" data-imgbigurl="frontend/img/{{ $productImage->path }}">
+                                                <img src="frontend/img/{{ $productImage->path }}" alt="">
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -102,32 +59,35 @@
 
                             <div class="col-sm-6">
                                 <div class="product-inner">
-                                    <h2 class="product-name">{{$products->name}}</h2>
+                                    <h2 class="product-name">{{ $products->name }}</h2>
                                     <div class="product-inner-price">
-                                        <ins>{{$products->price}} VND</ins>
+                                        <ins>{{ $products->price }} VND</ins>
                                     </div>
 
                                     <form action="" class="cart">
                                         <div class="quantity">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+                                            <input type="number" size="4" class="input-text qty text" title="Qty"
+                                                value="1" name="quantity" min="1" step="1">
                                         </div>
                                         <button class="add_to_cart_button" type="submit">Add to cart</button>
                                     </form>
 
                                     <div class="product-inner-category">
-                                        <p>Category: <a href="">{{$products->category}}</a></p>
-                                            {{-- Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. --}}
+                                        <p>Category: <a href="">{{ $products->category }}</a></p>
+                                        {{-- Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. --}}
                                     </div>
 
                                     <div role="tabpanel">
                                         <ul class="product-tab" role="tablist">
-                                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
+                                            <li role="presentation" class="active"><a href="#home" aria-controls="home"
+                                                    role="tab" data-toggle="tab">Description</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile"
+                                                    role="tab" data-toggle="tab">Reviews</a></li>
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                                 <h2>Product Description</h2>
-                                                <p>{!!$products->detail!!}</p>
+                                                <p>{!! $products->detail !!}</p>
 
 
                                             </div>
@@ -135,30 +95,42 @@
                                                 <div role="tabpanel" class="tab-pane fade" id="profile">
                                                     <h2>Reviews</h2>
                                                     <div class="submit-review">
-                                                        <p><label for="name">Name</label> <input name="name" type="text"></p>
-                                                        <p><label for="email">Email</label> <input name="email" type="email"></p>
+                                                        <p><label for="name">Name</label> <input name="name"
+                                                                type="text"></p>
+                                                        <p><label for="email">Email</label> <input name="email"
+                                                                type="email"></p>
                                                         <div class="rating-chooser">
                                                             <p>Your rating</p>
 
                                                             <div class="rating-wrap-post">
                                                                 <div class="personal-rating">
                                                                     <div class="rate">
-                                                                        <input type="radio" id="star5" name="rating" value="5" />
+                                                                        <input type="radio" id="star5" name="rating"
+                                                                            value="5" />
                                                                         <label for="star5" title="text">5 stars</label>
-                                                                        <input type="radio" id="star4" name="rating" value="4" />
+                                                                        <input type="radio" id="star4" name="rating"
+                                                                            value="4" />
                                                                         <label for="star4" title="text">4 stars</label>
-                                                                        <input type="radio" id="star3" name="rating" value="3" />
-                                                                        <label for="star3" title="text">3 stars</label>
-                                                                        <input type="radio" id="star2" name="rating" value="2" />
-                                                                        <label for="star2" title="text">2 stars</label>
-                                                                        <input type="radio" id="star1" name="rating" value="1" />
-                                                                        <label for="star1" title="text">1 star</label>
+                                                                        <input type="radio" id="star3"
+                                                                            name="rating" value="3" />
+                                                                        <label for="star3" title="text">3
+                                                                            stars</label>
+                                                                        <input type="radio" id="star2"
+                                                                            name="rating" value="2" />
+                                                                        <label for="star2" title="text">2
+                                                                            stars</label>
+                                                                        <input type="radio" id="star1"
+                                                                            name="rating" value="1" />
+                                                                        <label for="star1" title="text">1
+                                                                            star</label>
                                                                     </div>
                                                                 </div>
                                                                 <br>
                                                             </div>
                                                         </div>
-                                                        <p><label for="review">Your review</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                                        <p><label for="review">Your review</label>
+                                                            <textarea name="review" id="" cols="30" rows="10"></textarea>
+                                                        </p>
                                                         <p><input type="submit" value="Submit"></p>
                                                     </div>
                                                 </div>
@@ -175,22 +147,25 @@
                             <h2 class="related-products-title">Related Products</h2>
                             <div class="related-products-carousel">
                                 <div class="single-product">
-                                    @foreach ($relatedProducts as $relatedProduct)
-                                    <div class="product-f-image">
-                                        <img src="{{$products->image}}" alt="">
-                                        <div class="product-hover">
-                                            <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                        </div>
+                                    <div class="">
+                                        @foreach ($relatedProducts as $relatedProduct)
+                                            <div class="product-f-image">
+                                                <img src="{{ $products->image }}" alt="">
+                                                <div class="product-hover">
+                                                    <a href="" class="add-to-cart-link"><i
+                                                            class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                    <a href="" class="view-details-link"><i
+                                                            class="fa fa-link"></i> See details</a>
+                                                </div>
+                                            </div>
+
+
+                                            <h2><a href="shop/product/{{$products->id}}">{{ $relatedProduct->name }}</a></h2>
+                                            <div class="product-carousel-price">
+                                                <ins>{{ $relatedProduct->price }} VND</ins>
+                                            </div>
+                                        @endforeach
                                     </div>
-
-
-                                    <h2><a href="">{{$relatedProduct->name}}</a></h2>
-                                    <div class="product-carousel-price">
-                                        <ins>{{$relatedProduct->price}} VND</ins>
-                                    </div>
-
-                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -199,6 +174,5 @@
             </div>
         </div>
     </div>
-
 
 @endsection

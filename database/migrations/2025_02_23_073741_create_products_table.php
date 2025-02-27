@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->string('category', 50)->nullable();
             $table->text('detail')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
 
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
         });
