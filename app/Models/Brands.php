@@ -1,13 +1,13 @@
 <?php
 
-// app/Models/Brand.php
+// app/Models/Brands.php
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Brand extends Model
+class Brands extends Model
 {
     protected $table = 'brands';
     protected $primaryKey = 'id';

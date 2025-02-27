@@ -6,6 +6,7 @@ use App\Models\ProductComment;
 use App\Models\ProductImages;
 use App\Models\Products;
 use App\Models\User;
+use App\Models\Brands;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -38,6 +39,20 @@ class DatabaseSeeder extends Seeder
             'phone' => '0837791414',
             'address' => 'Hanoi, Vietnam',
             'avatar' => 'avatar2.jpg',
+        ]
+        ]);
+
+        Brands::insert([[
+            'id' => 1,
+            'name' => 'Samsung',
+            'description' => 'Samsung',
+            'logo' => 'samsung.jpg',
+        ],
+        [
+            'id' => 2,
+            'name' => 'HP',
+            'description' => 'HP',
+            'logo' => 'hp.jpg',
         ]
         ]);
 
@@ -100,11 +115,6 @@ class DatabaseSeeder extends Seeder
             'image' => 'product-2.jpg',
         ]
         ]);
-
-        // ProductComment::factory()->createe([[
-        //     'product_id'=> 1,
-        //     'user_id'=> 1,
-        // ]]);
 
     }
 }

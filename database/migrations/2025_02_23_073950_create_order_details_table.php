@@ -8,22 +8,28 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('order_details', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->string('order_id', 191);
-            $table->foreignId('product_id')->nullable()->constrained();
+            $table->string('order_id');
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->string('product_name')->nullable();
             $table->integer('quantity')->nullable();
             $table->decimal('price', 15, 2)->nullable();
-            $table->foreignId('buyer_id')->nullable()->constrained('buyers');
+            $table->unsignedBigInteger('buyer_id')->nullable();
             $table->string('buyer_name')->nullable();
-            $table->foreignId('seller_id')->nullable()->constrained('sellers');
+            $table->unsignedBigInteger('seller_id')->nullable();
             $table->string('seller_name')->nullable();
-            $table->enum('status', ['Pending','Processing','Shipping','Delivered','Cancelled'])->default('Pending');
+            $table->enum('status', ['Pending', 'Processing', 'Shipping', 'Delivered', 'Cancelled'])->default('Pending');
             $table->string('buyer_address');
             $table->string('buyer_phone');
             $table->timestamps();
-            $table->index('order_id');
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
+            $table->foreign('buyer_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('seller_id')->references('id')->on('users')->onDelete('set null');
         });
+
+
     }
 
     public function down()

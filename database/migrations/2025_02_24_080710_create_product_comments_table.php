@@ -14,15 +14,18 @@ class CreateProductCommentsTable extends Migration
     public function up()
     {
         Schema::create('product_comments', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
-
-            $table->integer('product_id')->unsigned();
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->string('email',191);
-            $table->string('name',191);
-            $table->string('message',191);
-            $table->integer('rating')->unsigned();
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->string('email');
+            $table->string('name');
+            $table->string('message');
+            $table->unsignedInteger('rating');
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

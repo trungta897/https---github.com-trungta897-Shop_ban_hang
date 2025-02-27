@@ -35,7 +35,7 @@ abstract class BaseRepositories implements RepositoriesInterFace
         return $this->model->find($id)->delete();
     }
 
-    public function find(int $id)
+    public function find($id)
     {
         return $this->model->findOrFail($id);
     }

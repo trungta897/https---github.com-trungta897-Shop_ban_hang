@@ -8,4 +8,5 @@ use App\Service\ServiceInterFace;
 interface ProductServiceInterFace extends ServiceInterFace
 {
 
+    public function getRealatedProducts($product, $limit = 5);
 }
