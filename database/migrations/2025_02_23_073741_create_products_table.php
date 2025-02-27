@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->decimal('price', 15, 2);
             $table->string('image')->nullable();
             $table->string('category', 50)->nullable();
+            $table->boolean('featured');
+            $table->integer('stock')->nullable();
             $table->text('detail')->nullable();
             $table->timestamp('created_at')->nullable();
 
