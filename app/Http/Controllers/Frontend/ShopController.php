@@ -13,9 +13,9 @@ class ShopController extends Controller
         $this->productService = $productService;
     }
 
-    public function show() {
+    public function show(Request $request) {
 
-        $products = $this->productService->getProductOnIndex();
+        $products = $this->productService->getProductOnIndex($request);
 
         return view('frontend.shop.shop', compact('products'));
     }

@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::prefix('shop')->group(function () {
-    Route::get('', [ShopController::class, 'show'])->name('shopShow');
 
-    Route::get('/product/{id}', [SingleProductController::class, 'show'])->name('singleProductShow');
+Route::get('/shop', [ShopController::class, 'show'])->name('shopShow');
 
-    Route::post('/product/{id}',[SingleProductController::class, 'postComment'] )->name('postComment');
- });
+Route::get('/shop/product/{id}', [SingleProductController::class, 'show'])->name('singleProductShow');
+
+Route::post('/shop/product/{id}', [SingleProductController::class, 'postComment'])->name('postComment');
+
 
 Route::get('/cart', [CartController::class, 'show'])->name('cartShow');
 

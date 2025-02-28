@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <base href="{{ url('/') }}/">
 
     <meta charset="utf-8">
@@ -9,7 +10,8 @@
     <title>@section('title')Mua di shop</title>
 
     <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet'
+        type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
@@ -31,8 +33,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
+</head>
+
+<body>
     {{-- Header --}}
 
     <div class="header-area">
@@ -54,7 +57,9 @@
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                        class="key">currency :</span><span class="value">USD </span><b
+                                        class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">USD</a></li>
                                     <li><a href="#">INR</a></li>
@@ -63,7 +68,9 @@
                             </li>
 
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span
+                                        class="key">language :</span><span class="value">English </span><b
+                                        class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">English</a></li>
                                     <li><a href="#">French</a></li>
@@ -88,7 +95,8 @@
 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="{{url('/cart')}}">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="{{url('/cart')}}">Cart - <span class="cart-amunt">$800</span> <i
+                                class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                     </div>
                 </div>
             </div>
@@ -110,14 +118,20 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{url('/')}}">Home</a></li>
                         <li class="active"><a href="{{url('/shop')}}">Shop page</a></li>
-                        <li><a href="{{url('/shop/product/{id}')}}">Single product</a></li>
                         <li><a href="{{url('/cart')}}">Cart</a></li>
                         <li><a href="{{url('/checkout')}}">Checkout</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>
+                    <form action="shop">
+                        <div class="search-container text-center" style="margin-top: 10px;">
+                                <input name="search" type="text" value="{{request('search')}}" placeholder="Search products..." style="width: 30%; padding: 5px;">
+                                <b><input type="submit" value="Search"></b>
+                        </div>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div> <!-- End mainmenu area -->
@@ -134,7 +148,10 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
                         <h2>e<span>Electronics</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero
+                            quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi
+                            iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi
+                            veritatis magni at?</p>
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -174,7 +191,8 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-newsletter">
                         <h2 class="footer-wid-title">Newsletter</h2>
-                        <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
+                        <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to
+                            your inbox!</p>
                         <div class="newsletter-form">
                             <form action="#">
                                 <input type="email" placeholder="Type your email">
@@ -192,7 +210,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by <a href="http://wpexpand.com" target="_blank">WP Expand</a></p>
+                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by <a
+                                href="http://wpexpand.com" target="_blank">WP Expand</a></p>
                     </div>
                 </div>
 
@@ -223,5 +242,6 @@
 
     <!-- Main Script -->
     <script src="frontend/js/main.js"></script>
-  </body>
+</body>
+
 </html>

@@ -5,7 +5,7 @@ namespace App\Repositories\Product;
 use App\Models\Products;
 use App\Repositories\BaseRepositories;
 use App\Repositories\Product\ProductRepositoryInterFace;
-use Illuminate\Support\Facades\DB;
+
 
 class ProductRepository extends BaseRepositories implements ProductRepositoryInterFace
 {
@@ -26,9 +26,40 @@ class ProductRepository extends BaseRepositories implements ProductRepositoryInt
         ->get();
     }
 
-    public function getProductOnIndex() {
-        $products = DB::table('products')->paginate(5);
+    public function getProductOnIndex($request) {
 
+        $sortBy = $request->type ?? 'default';
+        $perPage = $request->show ?? 5;
+        $search = $request->search ??'';
+
+        $products = $this->model->where('name', 'like', '%' . $search . '%');
+
+        switch ($request->type) {
+            case 'name-ascending':
+                $products = $products->orderBy('name', 'asc');
+                break;
+            case 'name-descending':
+                $products = $products->orderBy('name', 'desc');
+                break;
+            case 'price-ascending':
+                $products = $products->orderBy('price', 'asc');
+                break;
+            case 'price-descending':
+                $products = $products->orderBy('price', 'desc');
+                break;
+            case 'lastest':
+                $products = $products->orderBy('created_at', 'desc');
+                break;
+            case 'oldest':
+                $products = $products->orderBy('created_at', 'asc');
+                break;
+            default:
+                $products = $products->orderBy('id');
+        }
+
+        $products = $products->paginate($perPage);
+
+        $products->appends(['sort_by' => $sortBy, 'show' => $perPage, 'search' => $search]);
         return $products;
     }
 }
