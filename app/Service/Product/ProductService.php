@@ -26,8 +26,7 @@ class ProductService extends BaseService implements ProductServiceInterFace
         return $this->repository->getRealatedProduct($product, $limit);
     }
 
-    public function getFeaturedProducts()
-    {
+    public function getFeaturedProducts() {
         return [
             "Điện thoại" => $this->repository->getFeaturedProductByCategory(1),
             "Laptop" => $this->repository->getFeaturedProductByCategory(2),
@@ -40,7 +39,13 @@ class ProductService extends BaseService implements ProductServiceInterFace
     }
 
     public function getProductsByCategory($category) {
-        return Products::where('category', $category)->get();
+        return Products::where('category', $category)->where('featured', true)->get();
     }
+
+    public function getLatestProducts() {
+        return Products::orderBy('created_at', 'desc')->take(6)->get(); // Adjust the number as needed
+    }
+
+
 
 }

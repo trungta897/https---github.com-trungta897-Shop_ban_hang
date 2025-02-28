@@ -17,8 +17,10 @@ class HomeController extends Controller
 
     public function index() {
 
+        // Fetch latest products
+        $latestProducts = $this->productService->getLatestProducts();
         $featuredProducts = $this->productService->getFeaturedProducts();
 
-        return view('frontend.index', compact('featuredProducts'));
+        return view('frontend.index', compact('latestProducts', 'featuredProducts'));
     }
 }
