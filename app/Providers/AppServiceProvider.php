@@ -16,7 +16,8 @@ use App\Service\ProductComment\ProductCommentServiceInterFace;
 use App\Service\ProductComment\ProductCommentService;
 
 use App\Service\ProductCategory\ProductCategoryServiceInterFace;
-use App\Service\ProductCategoryService\ProductCategoryService;
+use App\Service\ProductCategory\ProductCategoryService;
+
 
 use Illuminate\Support\ServiceProvider;
 
