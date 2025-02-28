@@ -73,8 +73,8 @@
                                     </form>
 
                                     <div class="product-inner-category">
-                                        <p>Category: <a href="">{{ $products->category }}</a></p>
-                                        {{-- Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. --}}
+                                        <p>Category: <b><a href="">{{ $products->category }}</a></b></p>
+                                        <p>Stock: <b>{{$products->stock}}</b></p>
                                     </div>
 
                                     <div role="tabpanel">

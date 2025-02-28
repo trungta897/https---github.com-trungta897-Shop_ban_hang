@@ -16,11 +16,11 @@ class SingleProductController extends Controller
     private $productCommentService;
 
 
-    public function __construct(ProductService $productService) {
+    public function __construct(ProductService $productService,) {
+        // ProductCommentServiceInterFace $productCommentService) {
         $this->productService = $productService;
         // $this->productService = $productCommentService;
     }
-
 
     public function show($id) {
 

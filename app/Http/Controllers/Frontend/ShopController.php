@@ -8,7 +8,16 @@ use App\Service\Product\ProductService;
 
 class ShopController extends Controller
 {
-    public function show() {
-        return view('frontend.shop.shop');
+    private $productService;
+    public function __construct(ProductService $productService) {
+        $this->productService = $productService;
     }
+
+    public function show() {
+
+        $products = $this->productService->getProductOnIndex();
+
+        return view('frontend.shop.shop', compact('products'));
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Repositories\Product;
 use App\Models\Products;
 use App\Repositories\BaseRepositories;
 use App\Repositories\Product\ProductRepositoryInterFace;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository extends BaseRepositories implements ProductRepositoryInterFace
 {
@@ -23,6 +24,12 @@ class ProductRepository extends BaseRepositories implements ProductRepositoryInt
         ->where('category', $categoryId)
         ->limit(5)
         ->get();
+    }
+
+    public function getProductOnIndex() {
+        $products = DB::table('products')->paginate(5);
+
+        return $products;
     }
 }
 
