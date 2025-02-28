@@ -120,7 +120,7 @@
                         <li class="active"><a href="{{url('/shop')}}">Shop page</a></li>
                         <li><a href="{{url('/cart')}}">Cart</a></li>
                         <li><a href="{{url('/checkout')}}">Checkout</a></li>
-                        <li><a href="#">Category</a></li>
+                        <li><a href="{{url('/category')}}">Category</a></li>
                         <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>
                     </ul>

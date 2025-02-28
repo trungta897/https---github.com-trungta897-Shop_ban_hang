@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Product\ProductRepositoryInterFace;
 use App\Repositories\Product\ProductRepository;
+use App\Repositories\ProductCategory\ProductCategoryRepository;
+use App\Repositories\ProductCategory\ProductCategoryRepositoryInterFace;
 use App\Repositories\ProductComment\ProductCommentRepositoryInterFace;
 use App\Repositories\ProductComment\ProductCommentRepository;
 
@@ -12,6 +14,9 @@ use App\Service\Product\ProductService;
 
 use App\Service\ProductComment\ProductCommentServiceInterFace;
 use App\Service\ProductComment\ProductCommentService;
+
+use App\Service\ProductCategory\ProductCategoryServiceInterFace;
+use App\Service\ProductCategory\ProductCategoryService;
 
 
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             ProductService::class
         );
 
+        // Poduct comments
         $this->app->singleton(
             ProductCommentRepositoryInterFace::class,
             ProductCommentRepository::class
@@ -43,6 +49,18 @@ class AppServiceProvider extends ServiceProvider
             ProductCommentServiceInterFace::class,
             ProductCommentService::class
         );
+
+        // Product Category
+        $this->app->singleton(
+            ProductCategoryRepositoryInterFace::class,
+            ProductCategoryRepository::class
+        );
+
+        $this->app->singleton(
+            ProductCategoryServiceInterFace::class,
+            ProductCategoryService::class
+        );
+
     }
 
     /**
