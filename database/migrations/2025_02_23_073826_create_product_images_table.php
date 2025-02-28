@@ -13,7 +13,7 @@ return new class extends Migration {
         $table->id();
         $table->unsignedBigInteger('product_id');
         $table->string('image');
-        $table->timestamps();
+        $table->timestamp('created_at')->nullable();
 
         $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
     });

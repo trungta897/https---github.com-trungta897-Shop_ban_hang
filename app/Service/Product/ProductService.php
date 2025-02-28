@@ -25,4 +25,17 @@ class ProductService extends BaseService implements ProductServiceInterFace
         return $this->repository->getRealatedProduct($product, $limit);
     }
 
+    public function getFeaturedProducts()
+    {
+        return [
+            "Điện thoại" => $this->repository->getFeaturedProductByCategory(1),
+            "Laptop" => $this->repository->getFeaturedProductByCategory(2),
+        ];
+    }
+
+    public function getProductOnIndex($request)
+    {
+        return $this->repository->getProductOnIndex($request);
+    }
+
 }

@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('address')->nullable();
             $table->string('avatar')->nullable();
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

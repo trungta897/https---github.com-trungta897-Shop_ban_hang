@@ -18,7 +18,7 @@ return new class extends Migration
         $table->unsignedBigInteger('seller_id')->nullable();
         $table->string('product_name');
         $table->integer('quantity_sold');
-        $table->timestamps();
+        $table->timestamp('created_at')->nullable();
 
         $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
         $table->foreign('seller_id')->references('id')->on('users')->onDelete('set null');

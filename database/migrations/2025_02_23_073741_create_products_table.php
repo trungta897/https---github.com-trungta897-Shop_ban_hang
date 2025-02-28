@@ -13,11 +13,13 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('brand_id')->nullable();
             $table->string('name', 100);
-            $table->decimal('price', 15, 2);
+            $table->decimal('price', 15, 0);
             $table->string('image')->nullable();
             $table->string('category', 50)->nullable();
+            $table->boolean('featured');
+            $table->integer('stock')->nullable();
             $table->text('detail')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
 
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
         });

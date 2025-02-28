@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->enum('status', ['Pending', 'Processing', 'Shipping', 'Delivered', 'Cancelled'])->default('Pending');
             $table->string('buyer_address');
             $table->string('buyer_phone');
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
             $table->foreign('buyer_id')->references('id')->on('users')->onDelete('set null');
