@@ -33,8 +33,15 @@
                             </div>
 
                             <div class="product-option-shop">
-                                <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70"
-                                    rel="nofollow" href="/canvas/shop/?add-to-cart=70">Add to cart</a>
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <div class="quantity-input">
+                                        <label for="quantity">Số lượng:</label>
+                                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ $product->stock }}" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                                </form>
                             </div>
                         </div>
                     @endforeach

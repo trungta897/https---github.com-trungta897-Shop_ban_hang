@@ -152,7 +152,7 @@
         </div>
     </div> <!-- End main content area -->
 
-    <div class="maincontent-area">
+    {{-- <div class="maincontent-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
@@ -195,7 +195,7 @@
                 </div>
             </div>
         </div>
-    </div> <!-- End main content area -->
+    </div> <!-- End main content area --> --}}
 
     <div class="brands-area">
         <div class="zigzag-bottom"></div>

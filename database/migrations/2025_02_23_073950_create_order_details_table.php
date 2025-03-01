@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('product_id')->nullable();
             $table->string('product_name')->nullable();
             $table->integer('quantity')->nullable();
-            $table->decimal('price', 15, 2)->nullable();
+            $table->decimal('price', 15, 0)->nullable();
             $table->unsignedBigInteger('buyer_id')->nullable();
             $table->string('buyer_name')->nullable();
             $table->unsignedBigInteger('seller_id')->nullable();

@@ -20,13 +20,19 @@ Route::get('/shop/product/{id}', [SingleProductController::class, 'show'])->name
 
 Route::post('/shop/product/{id}', [SingleProductController::class, 'postComment'])->name('postComment');
 
-
-Route::get('/cart', [CartController::class, 'show'])->name('cartShow');
-
 Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkoutShow');
 
 Route::get('/category', [CategoryController::class, 'showCategory'])->name('categoryShow');
 
+Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [App\Http\Controllers\Frontend\CartController::class, 'show'])->name('cart.show');
+    Route::post('/cart/add', [App\Http\Controllers\Frontend\CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [App\Http\Controllers\Frontend\CartController::class, 'remove'])->name('cart.remove');
+    Route::put('/cart/update/{id}', [App\Http\Controllers\Frontend\CartController::class, 'update'])->name('cart.update');
+});
 
 
 
