@@ -5,12 +5,19 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\CartItem;
-use App\Models\Products;
+use App\Service\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    private $productService;
+
+    public function __construct(ProductService $productService) {
+        $this->productService = $productService;
+
+    }
+
     public function show()
     {
         // Lấy danh sách sản phẩm trong giỏ hàng của người dùng hiện tại
@@ -59,4 +66,10 @@ class CartController extends Controller
         }
         return redirect()->route('cart.show')->with('error', 'Không tìm thấy sản phẩm để cập nhật!');
     }
+
+    // public function relatedShow($id) {
+    //     $products = $this->productService->find($id);
+    //     $relatedProducts = $this->productService->getRelatedProducts($products, 5);
+    //     return view('frontend.shop.single-product', compact('products', 'relatedProducts'));
+    // }
 }

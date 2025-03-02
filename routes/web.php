@@ -26,6 +26,8 @@ Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkoutShow
 
 Route::get('/category', [CategoryController::class, 'showCategory'])->name('categoryShow');
 
+Route::get('/shop/product/{id}', [CartController::class, 'relatedShow'])->name('product.show');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'show'])->name('cart.show');

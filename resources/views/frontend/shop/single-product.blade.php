@@ -54,10 +54,13 @@
                                         <ins>{{ $products->price }} VND</ins>
                                     </div>
 
-                                    <form action="" class="cart">
+                                    <form action="{{route('cart.add')}}" method="POST" class="cart">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $products->id }}">
                                         <div class="quantity">
-                                            <input type="number" size="4" class="input-text qty text" title="Qty"
-                                                value="1" name="quantity" min="1" step="1">
+                                            <label for="quantity">Số lượng:</label>
+                                            <input type="number" id="quantity" name="quantity" value="1" min="1"
+                                                max="{{ $products->stock }}" required>
                                         </div>
                                         <button class="add_to_cart_button" type="submit">Add to cart</button>
                                     </form>
@@ -71,8 +74,8 @@
                                         <ul class="product-tab" role="tablist">
                                             <li role="presentation" class="active"><a href="#home" aria-controls="home"
                                                     role="tab" data-toggle="tab">Description</a></li>
-                                            <li role="presentation"><a href="#profile" aria-controls="profile"
-                                                    role="tab" data-toggle="tab">Reviews</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                                    data-toggle="tab">Reviews</a></li>
                                         </ul>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
@@ -85,8 +88,8 @@
                                                 <div role="tabpanel" class="tab-pane fade" id="profile">
                                                     <h2>Reviews</h2>
                                                     <div class="submit-review">
-                                                        <p><label for="name">Name</label> <input name="name"
-                                                                type="text"></p>
+                                                        <p><label for="name">Name</label> <input name="name" type="text">
+                                                        </p>
                                                         <p><label for="email">Email</label> <input name="email"
                                                                 type="email"></p>
                                                         <div class="rating-chooser">
@@ -101,16 +104,16 @@
                                                                         <input type="radio" id="star4" name="rating"
                                                                             value="4" />
                                                                         <label for="star4" title="text">4 stars</label>
-                                                                        <input type="radio" id="star3"
-                                                                            name="rating" value="3" />
+                                                                        <input type="radio" id="star3" name="rating"
+                                                                            value="3" />
                                                                         <label for="star3" title="text">3
                                                                             stars</label>
-                                                                        <input type="radio" id="star2"
-                                                                            name="rating" value="2" />
+                                                                        <input type="radio" id="star2" name="rating"
+                                                                            value="2" />
                                                                         <label for="star2" title="text">2
                                                                             stars</label>
-                                                                        <input type="radio" id="star1"
-                                                                            name="rating" value="1" />
+                                                                        <input type="radio" id="star1" name="rating"
+                                                                            value="1" />
                                                                         <label for="star1" title="text">1
                                                                             star</label>
                                                                     </div>
@@ -137,25 +140,21 @@
                             <h2 class="related-products-title">Related Products</h2>
                             <div class="related-products-carousel">
                                 <div class="single-product">
-                                    <div class="">
-                                        @foreach ($relatedProducts as $relatedProduct)
-                                            <div class="product-f-image">
-                                                <img src="{{ $products->image }}" alt="">
-                                                <div class="product-hover">
-                                                    <a href="" class="add-to-cart-link"><i
-                                                            class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                    <a href="" class="view-details-link"><i
-                                                            class="fa fa-link"></i> See details</a>
-                                                </div>
+                                    @foreach ($relatedProducts as $relatedProduct)
+                                        <div class="product-f-image">
+                                            <img src="{{ $products->image }}" alt="">
+                                            <div class="product-hover">
+                                                <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
+                                                    cart</a>
+                                                <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                             </div>
+                                        </div>
+                                        <h2><a href="shop/product/{{$products->id}}">{{ $relatedProduct->name }}</a></h2>
+                                        <div class="product-carousel-price">
+                                            <ins>{{ number_format($relatedProduct->price) }} VND</ins>
+                                        </div>
+                                    @endforeach
 
-
-                                            <h2><a href="shop/product/{{$products->id}}">{{ $relatedProduct->name }}</a></h2>
-                                            <div class="product-carousel-price">
-                                                <ins>{{ $relatedProduct->price }} VND</ins>
-                                            </div>
-                                        @endforeach
-                                    </div>
                                 </div>
                             </div>
                         </div>

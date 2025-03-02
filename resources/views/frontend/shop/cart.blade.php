@@ -78,7 +78,7 @@
                                                 </td>
 
                                                 <td class="product-subtotal">
-                                                    <span class="amount">${{ $item->price * $item->quantity }}</span>
+                                                    <span class="amount">{{ $item->price * $item->quantity }} VND</span>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -91,12 +91,33 @@
                                     </tbody>
                                 </table>
                             </form>
+
                             <div class="cart-collaterals">
                                 <div class="cross-sells">
                                     <h2>You may be interested in...</h2>
-                                    <ul class="products">
-                                        <!-- Add your cross-sell products here -->
-                                    </ul>
+                                    <div class="related-products">
+                                        {{-- @foreach ($relatedProducts as $relatedProduct)
+                                            <div class="single-product">
+                                                <div class="product-f-image">
+                                                    <img src="{{ $relatedProduct->image }}" alt="{{ $relatedProduct->name }}">
+                                                    <div class="product-hover">
+                                                        <a href="{{ route('cart.add', $relatedProduct->id) }}" class="add-to-cart-link">
+                                                            <i class="fa fa-shopping-cart"></i> Add to cart
+                                                        </a>
+                                                        <a href="{{ route('product.show', $relatedProduct->id) }}" class="view-details-link">
+                                                            <i class="fa fa-link"></i> See details
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <h2>
+                                                    <h2><a href="shop/product/{{$products->id}}">{{ $relatedProduct->name }}</a></h2>
+                                                </h2>
+                                                <div class="product-carousel-price">
+                                                    <ins>{{ number_format($relatedProduct->price, 0, ',', '.') }} VND</ins>
+                                                </div>
+                                            </div>
+                                        @endforeach --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
