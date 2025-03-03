@@ -37,7 +37,6 @@
 
 <body>
     {{-- Header --}}
-
     <div class="header-area">
         <div class="container">
             <div class="row">
@@ -48,7 +47,19 @@
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="{{url('/cart')}}"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="{{url('/checkout')}}"><i class="fa fa-user"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
+                                @if(Auth::check())
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                                <i class="fa fa-sign-out"></i> Logout
+                                            </a>
+                                        </form>
+                                    </li>
+                                @else
+                                    <li><a href="{{ url('/login') }}"><i class="fa fa-user"></i> Login</a></li>
+                                @endif
                         </ul>
                     </div>
                 </div>
@@ -126,8 +137,9 @@
                     </ul>
                     <form action="shop">
                         <div class="search-container text-center" style="margin-top: 10px;">
-                                <input name="search" type="text" value="{{request('search')}}" placeholder="Search products..." style="width: 30%; padding: 5px;">
-                                <b><input type="submit" value="Search"></b>
+                            <input name="search" type="text" value="{{request('search')}}"
+                                placeholder="Search products..." style="width: 30%; padding: 5px;">
+                            <b><input type="submit" value="Search"></b>
                         </div>
                     </form>
                 </div>
@@ -139,9 +151,9 @@
     {{-- Body --}}
     @yield('body')
     @if (session('success'))
-    <div class="alert alert-success" role="alert">
-        {{ session('success') }}
-    </div>
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
     @endif
 
     {{-- Footer --}}
