@@ -9,6 +9,8 @@ class OrderDetail extends Model
     protected $table = 'order_details';
     protected $primaryKey = 'id';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'order_id', 'product_id', 'product_name', 'quantity', 'price',
         'buyer_id', 'buyer_name', 'seller_id', 'seller_name',

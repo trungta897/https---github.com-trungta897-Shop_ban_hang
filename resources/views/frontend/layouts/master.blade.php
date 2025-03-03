@@ -20,6 +20,7 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="frontend/css/owl.carousel.css">
@@ -46,7 +47,6 @@
                             <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="{{url('/cart')}}"><i class="fa fa-user"></i> My Cart</a></li>
-                            <li><a href="{{url('/checkout')}}"><i class="fa fa-user"></i> Checkout</a></li>
                                 @if(Auth::check())
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
@@ -123,7 +123,6 @@
                         <li><a href="{{url('/')}}">Home</a></li>
                         <li class="active"><a href="{{url('/shop')}}">Shop page</a></li>
                         <li><a href="{{url('/cart')}}">Cart</a></li>
-                        <li><a href="{{url('/checkout')}}">Checkout</a></li>
                         <li><a href="{{url('/category')}}">Category</a></li>
                         <li><a href="#">Others</a></li>
                         <li><a href="#">Contact</a></li>

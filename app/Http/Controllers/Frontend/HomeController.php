@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Service\Product\ProductServiceInterFace;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -13,13 +14,16 @@ class HomeController extends Controller
         $this->productService = $productService;
     }
 
-
-    public function index() {
+    public function index(Request $request) {
 
         // Fetch latest products
-        $latestProducts = $this->productService->getLatestProducts();
-        $featuredProducts = $this->productService->getFeaturedProducts();
+        try {
+            $products = $this->productService->getProductOnIndex($request);
+            $latestProducts = $this->productService->getLatestProducts();
+            $featuredProducts = $this->productService->getFeaturedProducts();
+        } catch (\Exception $e) {
+        }
 
-        return view('frontend.index', compact('latestProducts', 'featuredProducts'));
+        return view('frontend.index', compact('latestProducts', 'featuredProducts', 'products'));
     }
 }
