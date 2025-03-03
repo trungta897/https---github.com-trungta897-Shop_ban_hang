@@ -28,8 +28,6 @@ return new class extends Migration {
             $table->foreign('buyer_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('set null');
         });
-
-
     }
 
     public function down()

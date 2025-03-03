@@ -33,8 +33,12 @@
                                         <div class="col-md-6 col-md-offset-6">
                                             <div class="slide-content">
                                                 <h2>We are awesome</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, dolorem, excepturi. Dolore aliquam quibusdam ut quae iure vero exercitationem ratione!</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi ab molestiae minus reiciendis! Pariatur ab rerum, sapiente ex nostrum laudantium.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur,
+                                                    dolorem, excepturi. Dolore aliquam quibusdam ut quae iure vero
+                                                    exercitationem ratione!</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi ab
+                                                    molestiae minus reiciendis! Pariatur ab rerum, sapiente ex nostrum
+                                                    laudantium.</p>
                                                 <a href="" class="readmore">Learn more</a>
                                             </div>
                                         </div>
@@ -54,7 +58,10 @@
                                         <div class="col-md-6 col-md-offset-6">
                                             <div class="slide-content">
                                                 <h2>We are great</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe aspernatur, dolorum harum molestias tempora deserunt voluptas possimus quos eveniet, vitae voluptatem accusantium atque deleniti inventore. Enim quam placeat expedita! Quibusdam!</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
+                                                    aspernatur, dolorum harum molestias tempora deserunt voluptas possimus
+                                                    quos eveniet, vitae voluptatem accusantium atque deleniti inventore.
+                                                    Enim quam placeat expedita! Quibusdam!</p>
                                                 <a href="" class="readmore">Learn more</a>
                                             </div>
                                         </div>
@@ -74,8 +81,12 @@
                                         <div class="col-md-6 col-md-offset-6">
                                             <div class="slide-content">
                                                 <h2>We are superb</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eius?</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptates necessitatibus dicta recusandae quae amet nobis sapiente explicabo voluptatibus rerum nihil quas saepe, tempore error odio quam obcaecati suscipit sequi.</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eius?
+                                                </p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti
+                                                    voluptates necessitatibus dicta recusandae quae amet nobis sapiente
+                                                    explicabo voluptatibus rerum nihil quas saepe, tempore error odio quam
+                                                    obcaecati suscipit sequi.</p>
                                                 <a href="" class="readmore">Learn more</a>
                                             </div>
                                         </div>
@@ -131,19 +142,23 @@
                         <h2 class="section-title">Latest Products</h2>
                         <div class="product-carousel">
                             @foreach ($latestProducts as $latestProduct)
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="{{ $latestProduct->image }}" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                <div class="single-product">
+                                    <div class="product-f-image">
+                                        <img src="{{ $latestProduct->image }}" alt="">
+                                        <div class="product-hover">
+                                            <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>
+                                                Add to cart</a>
+                                            <a href="{{ route('product.show', $latestProduct->id) }}"
+                                                class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                        </div>
+                                    </div>
+                                    <h2><a
+                                            href="{{ route('product.show', $latestProduct->id) }}">{{ $latestProduct->name }}</a>
+                                    </h2>
+                                    <div class="product-carousel-price">
+                                        <ins>{{ number_format($latestProduct->price) }} VND</ins>
                                     </div>
                                 </div>
-                                <h2><a href="single-product.html">{{ $latestProduct->name }}</a></h2>
-                                <div class="product-carousel-price">
-                                    <ins>${{ $latestProduct->price }}</ins>
-                                </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -160,35 +175,27 @@
                     <div class="latest-product">
                         <h2 class="section-title">Featured Products</h2>
                         <div class="product-carousel">
-                            @foreach ($featuredProducts['Điện thoại'] as $phoneProduct)
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="{{ $phoneProduct->image }}" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                            @foreach ($featuredProducts as $category => $products)
+                                <h3>{{ $category }}</h3>
+                                @foreach ($products as $product)
+                                    <div class="single-product">
+                                        <div class="product-f-image">
+                                            <img src="{{ $product->image }}" alt="">
+                                            <div class="product-hover">
+                                                <a href="{{ route('cart.add', $product->id) }}"
+                                                    class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
+                                                    cart</a>
+                                                <a href="{{ route('product.show', $product->id) }}"
+                                                    class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                            </div>
+                                        </div>
+                                        <h2><a href="{{ route('product.show', $product->id) }}">{{ $product->name }}</a>
+                                        </h2>
+                                        <div class="product-carousel-price">
+                                            <ins>{{ number_format($product->price) }} VND</ins>
+                                        </div>
                                     </div>
-                                </div>
-                                <h2><a href="single-product.html">{{ $phoneProduct->name }}</a></h2>
-                                <div class="product-carousel-price">
-                                    <ins>{{ $phoneProduct->price }}</ins>
-                                </div>
-                            </div>
-                            @endforeach
-                            @foreach ($featuredProducts['Laptop'] as $laptopProduct)
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="{{ $laptopProduct->image }}" alt="">
-                                    <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                        <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                    </div>
-                                </div>
-                                <h2><a href="single-product.html">{{ $laptopProduct->name }}</a></h2>
-                                <div class="product-carousel-price">
-                                    <ins>{{ $laptopProduct->price }}</ins>
-                                </div>
-                            </div>
+                                @endforeach
                             @endforeach
                         </div>
                     </div>
@@ -229,7 +236,8 @@
                         <h2 class="product-wid-title">Top Sellers</h2>
                         <a href="" class="wid-view-more">View All</a>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-1.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -243,7 +251,8 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-2.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Apple new mac book 2015</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -257,7 +266,8 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-3.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Apple new i phone 6</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -277,7 +287,8 @@
                         <h2 class="product-wid-title">Recently Viewed</h2>
                         <a href="#" class="wid-view-more">View All</a>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-4.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -291,7 +302,8 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-1.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -305,7 +317,8 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-2.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-2.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -325,7 +338,8 @@
                         <h2 class="product-wid-title">Top New</h2>
                         <a href="#" class="wid-view-more">View All</a>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-3.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-3.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Apple new i phone 6</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -339,7 +353,8 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-4.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-4.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>
@@ -353,7 +368,8 @@
                             </div>
                         </div>
                         <div class="single-wid-product">
-                            <a href="single-product.html"><img src="frontend/img/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                            <a href="single-product.html"><img src="frontend/img/product-thumb-1.jpg" alt=""
+                                    class="product-thumb"></a>
                             <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
                             <div class="product-wid-rating">
                                 <i class="fa fa-star"></i>

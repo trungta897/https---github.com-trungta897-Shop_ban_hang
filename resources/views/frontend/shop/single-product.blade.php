@@ -51,7 +51,7 @@
                                 <div class="product-inner">
                                     <h2 class="product-name">{{ $products->name }}</h2>
                                     <div class="product-inner-price">
-                                        <ins>{{ $products->price }} VND</ins>
+                                        <ins>{{ number_format($products->price) }} VND</ins>
                                     </div>
 
                                     <form action="{{route('cart.add')}}" method="POST" class="cart">
