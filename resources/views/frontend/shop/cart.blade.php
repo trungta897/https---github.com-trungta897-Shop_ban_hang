@@ -26,105 +26,85 @@
                             @if(session('success'))
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
-                            <form method="post" action="#">
-                                <table cellspacing="0" class="shop_table cart">
-                                    <thead>
-                                        <tr>
-                                            <th class="product-remove">&nbsp;</th>
-                                            <th class="product-thumbnail">&nbsp;</th>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product-quantity">Quantity</th>
-                                            <th class="product-subtotal">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($cartItems as $item)
-                                            <tr class="cart_item">
-                                                <td class="product-remove">
-                                                    <form action="{{ route('cart.remove', $item->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="remove" title="Remove this item">×</button>
-                                                    </form>
-                                                </td>
 
-                                                <td class="product-thumbnail">
-                                                    <a href="single-product.html"><img width="145" height="145"
-                                                        alt="{{ $item->product->name }}" class="shop_thumbnail"
-                                                        src="{{ $item->product->image }}"></a>
-                                                </td>
+                            <table cellspacing="0" class="shop_table cart">
+                                <thead>
+                                    <tr>
+                                        <th class="product-remove">Remove</th>
+                                        <th class="product-name">Product</th>
+                                        <th class="product-price">Price</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($cartItems as $item)
+                                        <tr class="cart_item">
+                                            <td class="product-remove">
+                                                <!-- Form riêng cho xóa sản phẩm -->
+                                                <form action="{{ route('cart.remove', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="remove" title="Remove this item">×</button>
+                                                </form>
+                                            </td>
 
-                                                <td class="product-name">
-                                                    <a href="single-product.html">{{ $item->product_name }}</a>
-                                                </td>
+                                            <td class="product-thumbnail">
+                                                <a href="single-product.html">
+                                                    <img width="145" height="145" alt="{{ $item->product->name }}"
+                                                        class="shop_thumbnail" src="{{ $item->product->image }}">
+                                                </a>
+                                            </td>
+                                            <td class="product-price">
+                                                <span class="amount">{{ number_format($item->price) }} VND</span>
+                                            </td>
 
-                                                <td class="product-price">
-                                                    <span class="amount">${{ $item->price }}</span>
-                                                </td>
-
-                                                <td class="product-quantity">
+                                            <td class="product-quantity">
+                                                <!-- Form riêng cho cập nhật số lượng -->
+                                                <form action="{{ route('cart.update', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
                                                     <div class="quantity buttons_added">
-                                                        <form action="{{ route('cart.update', $item->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <input type="button" class="minus" value="-">
-                                                            <input type="number" size="4" class="input-text qty text" name="quantity" title="Qty"
-                                                                value="{{ $item->quantity }}" min="0" step="1">
-                                                            <input type="button" class="plus" value="+">
-                                                            <button type="submit" class="btn btn-primary">Update</button>
-                                                        </form>
-                                                    </div>
-                                                </td>
 
-                                                <td class="product-subtotal">
-                                                    <span class="amount">{{ $item->price * $item->quantity }} VND</span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        <tr>
-                                            <td class="actions" colspan="6">
-                                                <input type="submit" value="Update Cart" class="button" name="update_cart">
-                                                <input type="submit" value="Proceed to Checkout" class="checkout-button button alt wc-forward" name="proceed">
+                                                        <input type="number" id="qty-{{ $item->id }}" size="4"
+                                                            class="input-text qty text" name="quantity" title="Qty"
+                                                            value="{{ $item->quantity }}" min="0" step="1">
+
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </form>
+                                            </td>
+
+                                            <td class="product-subtotal">
+                                                <span class="amount">{{ $item->price * $item->quantity }} VND</span>
                                             </td>
                                         </tr>
-                                    </tbody>
-                                </table>
-                            </form>
+                                    @endforeach
+                                    <tr>
+                                        <td class="actions" colspan="6">
+                                            <!-- Nếu bạn có form riêng để cập nhật toàn bộ giỏ hàng, đặt ở đây -->
+                                            <!-- Hoặc sử dụng liên kết cho chuyển sang trang thanh toán -->
+                                            <a href="{{ route('checkout.index') }}"
+                                                class="checkout-button button alt wc-forward">Proceed to Checkout</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
                             <div class="cart-collaterals">
                                 <div class="cross-sells">
                                     <h2>You may be interested in...</h2>
                                     <div class="related-products">
-                                        {{-- @foreach ($relatedProducts as $relatedProduct)
-                                            <div class="single-product">
-                                                <div class="product-f-image">
-                                                    <img src="{{ $relatedProduct->image }}" alt="{{ $relatedProduct->name }}">
-                                                    <div class="product-hover">
-                                                        <a href="{{ route('cart.add', $relatedProduct->id) }}" class="add-to-cart-link">
-                                                            <i class="fa fa-shopping-cart"></i> Add to cart
-                                                        </a>
-                                                        <a href="{{ route('product.show', $relatedProduct->id) }}" class="view-details-link">
-                                                            <i class="fa fa-link"></i> See details
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <h2>
-                                                    <h2><a href="shop/product/{{$products->id}}">{{ $relatedProduct->name }}</a></h2>
-                                                </h2>
-                                                <div class="product-carousel-price">
-                                                    <ins>{{ number_format($relatedProduct->price, 0, ',', '.') }} VND</ins>
-                                                </div>
-                                            </div>
-                                        @endforeach --}}
+                                        {{-- Code hiển thị các sản phẩm liên quan --}}
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                        </div><!-- .woocommerce -->
+                    </div><!-- .product-content-right -->
+                </div><!-- .col-md-12 -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .single-product-area -->
 
 @endsection
+

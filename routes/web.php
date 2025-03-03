@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -21,8 +22,6 @@ Route::get('/shop', [ShopController::class, 'show'])->name('shopShow');
 Route::get('/shop/product/{id}', [SingleProductController::class, 'show'])->name('singleProductShow');
 
 Route::post('/shop/product/{id}', [SingleProductController::class, 'postComment'])->name('postComment');
-
-Route::post('/checkout', CheckoutController::class)->middleware('auth');
 
 Route::get('/category', [CategoryController::class, 'showCategory'])->name('categoryShow');
 
@@ -41,6 +40,9 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 
 
