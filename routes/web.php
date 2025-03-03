@@ -6,12 +6,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\ShopController;
 use App\Http\Controllers\Frontend\SingleProductController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -22,9 +23,9 @@ Route::get('/shop/product/{id}', [SingleProductController::class, 'show'])->name
 
 Route::post('/shop/product/{id}', [SingleProductController::class, 'postComment'])->name('postComment');
 
-Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkoutShow');
-
 Route::get('/category', [CategoryController::class, 'showCategory'])->name('categoryShow');
+
+Route::get('/shop/product/{id}', [CartController::class, 'relatedShow'])->name('product.show');
 
 
 Route::middleware('auth')->group(function () {
@@ -39,6 +40,9 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 
 

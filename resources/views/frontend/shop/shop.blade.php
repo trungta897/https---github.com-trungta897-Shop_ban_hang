@@ -33,14 +33,10 @@
                             </div>
 
                             <div class="product-option-shop">
-                                <form action="{{ route('cart.add') }}" method="POST">
+                                <form action="shop/product/{{$product->id}}" method="GET">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <div class="quantity-input">
-                                        <label for="quantity">Số lượng:</label>
-                                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ $product->stock }}" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                                    <button type="submit" class="btn btn-primary" value="{{ $product->id }}">Xem chi tiết</button>
                                 </form>
                             </div>
                         </div>
