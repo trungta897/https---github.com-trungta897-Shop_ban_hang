@@ -141,7 +141,7 @@
                                 </div>
                                 <h2><a href="single-product.html">{{ $latestProduct->name }}</a></h2>
                                 <div class="product-carousel-price">
-                                    <ins>${{ $latestProduct->price }}</ins>
+                                    <ins>{{ number_format($latestProduct->price) }} VND</ins>
                                 </div>
                             </div>
                             @endforeach

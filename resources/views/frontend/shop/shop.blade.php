@@ -29,7 +29,7 @@
                             </div>
                             <h2><a href="shop/product/{{$product->id}}">{{$product->name}}</a></h2>
                             <div class="product-carousel-price">
-                                <ins>{{$product->price}} VND</ins>
+                                <ins>{{number_format($product->price)}} VND</ins>
                             </div>
 
                             <div class="product-option-shop">

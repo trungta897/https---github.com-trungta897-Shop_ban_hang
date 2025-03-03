@@ -11,8 +11,8 @@ class OrderDetail extends Model
 
     protected $fillable = [
         'order_id', 'product_id', 'product_name', 'quantity', 'price',
-        'buyer_id', 'buyer_name', 'seller_id', 'seller_name', 'status',
-        'buyer_address', 'buyer_phone', 'created_at'
+        'buyer_id', 'buyer_name', 'seller_id', 'seller_name',
+        'buyer_address', 'buyer_phone', 'status', 'created_at'
     ];
 
     protected $guarded = [];

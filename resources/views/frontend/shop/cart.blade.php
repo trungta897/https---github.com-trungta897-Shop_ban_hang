@@ -40,6 +40,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach($cartItems as $item)
+                                        {{-- @dd($item) --}}
                                             <tr class="cart_item">
                                                 <td class="product-remove">
                                                     <form action="{{ route('cart.remove', $item->id) }}" method="POST">
@@ -80,7 +81,7 @@
                                         <tr>
                                             <td class="actions" colspan="6">
 
-                                                <a href="{{ route('checkout.index') }}"
+                                                <a href="{{ url('/checkout') }}"
                                                     class="checkout-button button alt wc-forward">Proceed to Checkout</a>
                                             </td>
                                         </tr>

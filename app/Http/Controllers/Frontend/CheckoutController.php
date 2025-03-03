@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Models\OrderDetail;
 use App\Http\Controllers\Controller;
-use App\Models\Products;
+use App\Models\Product;
+use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
@@ -14,65 +15,77 @@ class CheckoutController extends Controller
      * Hiển thị trang thanh toán (checkout)
      */
     public function index()
-{
-    // Giả sử bạn lưu giỏ hàng trong session
-    $cart = session()->get('cart', []);
+    {
+        $cartItems = CartItem::where('user_id', Auth::id())->with('product')->get();
 
-    // Tính toán tổng tiền của các sản phẩm trong giỏ hàng
-    $cartSubtotal = 0;
-    if (!empty($cart)) {
-        foreach ($cart as $item) {
-            $cartSubtotal += $item['price'] * $item['quantity'];
+        $cartSubtotal = 0;
+        foreach ($cartItems as $item) {
+            $price = $item->price ?? ($item->product->price ?? 0);
+            $cartSubtotal += $price * $item->quantity;
         }
+
+        $orderTotal = $cartSubtotal;
+
+        return view('frontend.shop.checkout', compact('cartItems', 'cartSubtotal', 'orderTotal'));
     }
-
-    // Giả sử Order Total bằng Cart Subtotal (với Free Shipping)
-    $orderTotal = $cartSubtotal;
-
-    // Truyền các biến cho view checkout
-    return view('frontend.shop.checkout', compact('cart', 'cartSubtotal', 'orderTotal'));
-}
 
     /**
      * Xử lý thanh toán và tạo đơn hàng mới
      */
     public function store(Request $request)
     {
-        // Validate dữ liệu đầu vào từ form
         $validatedData = $request->validate([
-            'product_id'    => 'required|integer|exists:products,id',
-            'quantity'      => 'required|integer|min:1',
             'buyer_address' => 'required|string|max:255',
-            'buyer_phone'   => 'required|string|max:20',
+            'buyer_phone' => 'required|string|max:20',
         ]);
 
-        // Lấy thông tin sản phẩm từ database
-        $product = Products::find($validatedData['product_id']);
-        if (!$product) {
-            return redirect()->back()->withErrors(['product_id' => 'Sản phẩm không hợp lệ.']);
+        $cartItems = CartItem::where('user_id', Auth::id())->with('product')->get();
+
+        if ($cartItems->isEmpty()) {
+            return redirect()->back()->with('error', 'Giỏ hàng của bạn trống.');
         }
 
-        // Tạo mã đơn hàng (order_id) ví dụ đơn giản: ORD + timestamp + random number
         $orderId = 'ORD' . time() . rand(100, 999);
 
-        // Tạo đơn hàng mới dựa trên migration order_details
-        $order = OrderDetail::create([
-            'order_id'      => $orderId,
-            'product_id'    => $product->id,
-            'product_name'  => $product->name,       // giả sử trường name của product
-            'quantity'      => $validatedData['quantity'],
-            'price'         => $product->price,      // giả sử trường price của product
-            'buyer_id'      => Auth::id(),           // lấy id của người mua từ auth
-            'buyer_name'    => Auth::user()->name,   // lấy tên người mua
-            'seller_id'     => $product->seller_id,    // giả sử product có seller_id
-            'seller_name'   => $product->seller->name ?? null, // nếu có quan hệ seller
-            'buyer_address' => $validatedData['buyer_address'],
-            'buyer_phone'   => $validatedData['buyer_phone'],
-            'status'        => 'Pending',            // mặc định là Pending theo migration
-            'created_at'    => now(),
-        ]);
+        try {
+            foreach ($cartItems as $item) {
+                $product = $item->product;
+                if (!$product) {
+                    continue;
+                }
 
-        // Sau khi tạo đơn hàng thành công, chuyển hướng về trang thông báo hoặc chi tiết đơn hàng
-        return redirect()->route('order.success')->with('order_id', $orderId);
+                OrderDetail::create([
+                    'order_id' => $orderId,
+                    'product_id' => $product->id,
+                    'product_name' => $product->name,
+                    'quantity' => $item->quantity,
+                    'price' => $product->price,
+                    'buyer_id' => Auth::id(),
+                    'buyer_name' => Auth::user()->username,
+                    'seller_id' => $product->seller_id,
+                    'seller_name' => $product->seller->username ?? 'Không xác định',
+                    'buyer_address' => $validatedData['buyer_address'],
+                    'buyer_phone' => $validatedData['buyer_phone'],
+                    'status' => 'Pending',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Xóa các mặt hàng trong giỏ hàng sau khi tạo đơn hàng
+            CartItem::where('user_id', Auth::id())->delete();
+
+            // Lưu order_id vào session để có thể hiển thị trong trang success
+            session()->flash('order_id', $orderId);
+
+            return redirect()->route('cart.show')->with('success', 'Đơn hàng của bạn đã được đặt thành công!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo đơn hàng: ' . $e->getMessage());
+        }
+    }
+
+    public function success(Request $request)
+    {
+        $orderId = session('order_id');
+        return view('frontend.shop.success', compact('orderId'));
     }
 }
