@@ -5,15 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Models\OrderDetail;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
-    /**
-     * Hiển thị trang thanh toán (checkout)
-     */
     public function index()
     {
         $cartItems = CartItem::where('user_id', Auth::id())->with('product')->get();
@@ -29,59 +25,49 @@ class CheckoutController extends Controller
         return view('frontend.shop.checkout', compact('cartItems', 'cartSubtotal', 'orderTotal'));
     }
 
-    /**
-     * Xử lý thanh toán và tạo đơn hàng mới
-     */
+
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'buyer_address' => 'required|string|max:255',
-            'buyer_phone' => 'required|string|max:20',
-        ]);
+{
+    $validatedData = $request->validate([
+        'buyer_address' => 'required|string|max:255',
+        'buyer_phone'   => 'required|string|max:20',
+    ]);
 
-        $cartItems = CartItem::where('user_id', Auth::id())->with('product')->get();
+    $cartItems = CartItem::where('user_id', Auth::id())->with('product')->get();
 
-        if ($cartItems->isEmpty()) {
-            return redirect()->back()->with('error', 'Giỏ hàng của bạn trống.');
-        }
-
-        $orderId = 'ORD' . time() . rand(100, 999);
-
-        try {
-            foreach ($cartItems as $item) {
-                $product = $item->product;
-                if (!$product) {
-                    continue;
-                }
-
-                OrderDetail::create([
-                    'order_id' => $orderId,
-                    'product_id' => $product->id,
-                    'product_name' => $product->name,
-                    'quantity' => $item->quantity,
-                    'price' => $product->price,
-                    'buyer_id' => Auth::id(),
-                    'buyer_name' => Auth::user()->username,
-                    'seller_id' => $product->seller_id,
-                    'seller_name' => $product->seller->username ?? 'Không xác định',
-                    'buyer_address' => $validatedData['buyer_address'],
-                    'buyer_phone' => $validatedData['buyer_phone'],
-                    'status' => 'Pending',
-                    'created_at' => now(),
-                ]);
-            }
-
-            // Xóa các mặt hàng trong giỏ hàng sau khi tạo đơn hàng
-            CartItem::where('user_id', Auth::id())->delete();
-
-            // Lưu order_id vào session để có thể hiển thị trong trang success
-            session()->flash('order_id', $orderId);
-
-            return redirect()->route('cart.show')->with('success', 'Đơn hàng của bạn đã được đặt thành công!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Có lỗi xảy ra khi tạo đơn hàng: ' . $e->getMessage());
-        }
+    if ($cartItems->isEmpty()) {
+        return redirect()->back()->with('error', 'Giỏ hàng của bạn trống.');
     }
+
+    $orderId = 'ORD' . time() . rand(100, 999);
+
+    foreach ($cartItems as $item) {
+        $product = $item->product;
+        if (!$product) {
+            continue;
+        }
+
+        OrderDetail::create([
+            'order_id'      => $orderId,
+            'product_id'    => $product->id,
+            'product_name'  => $product->name,
+            'quantity'      => $item->quantity,
+            'price'         => $product->price,
+            'buyer_id'      => Auth::id(),
+            'buyer_name'    => Auth::user()->username, // hoặc tên khác nếu có
+            'seller_id'     => $product->seller_id,
+            'seller_name'   => $product->seller->username ?? null,
+            'buyer_address' => $validatedData['buyer_address'],
+            'buyer_phone'   => $validatedData['buyer_phone'],
+            'status'        => 'Pending',
+            'created_at'    => now(),
+        ]);
+    }
+
+    CartItem::where('user_id', Auth::id())->delete();
+
+    return redirect()->route('checkout.success')->with('order_id', $orderId);
+}
 
     public function success(Request $request)
     {
