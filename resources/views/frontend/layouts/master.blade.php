@@ -51,14 +51,14 @@
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <a href="{{ route('logout') }}"
-                                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                            <a href="{{ route('logout') }}"onclick="event.preventDefault(); this.closest('form').submit();">
                                                 <i class="fa fa-sign-out"></i> Logout
                                             </a>
                                         </form>
                                     </li>
                                 @else
                                     <li><a href="{{ url('/login') }}"><i class="fa fa-user"></i> Login</a></li>
+                                    <li><a href="{{ url('/register') }}"><i class="fa fa-user"></i> Register</a></li>
                                 @endif
                         </ul>
                     </div>
@@ -142,11 +142,6 @@
 
     {{-- Body --}}
     @yield('body')
-    @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif
 
     {{-- Footer --}}
 

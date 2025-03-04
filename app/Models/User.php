@@ -17,5 +17,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public $timestamps = false; // Tắt timestamps vì migration không có updated_at
+    public $timestamps = false;
+
+    public function products()
+    {
+        return $this->hasMany(Products::class);
+    }
+
+    public function sellerOrders()
+    {
+        return $this->hasMany(OrderDetail::class, 'seller_id');
+    }
+
+    public function buyerOrders()
+    {
+        return $this->hasMany(OrderDetail::class, 'buyer_id');
+    }
 }
