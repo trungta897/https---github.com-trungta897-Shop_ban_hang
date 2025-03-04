@@ -47,4 +47,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/seller/dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');
+    Route::get('/seller/products/create', [DashboardController::class, 'create'])->name('seller.create');
+    Route::post('/seller/products', [DashboardController::class, 'store'])->name('seller.store');
+    Route::get('/seller/products/{product}/edit', [DashboardController::class, 'edit'])->name('seller.edit');
+    Route::put('/seller/products/{product}', [DashboardController::class, 'update'])->name('seller.update');
+    Route::delete('/seller/products/{product}', [DashboardController::class, 'destroy'])->name('seller.destroy');
+    Route::put('/seller/orders/{order}', [DashboardController::class, 'updateOrder'])->name('seller.update.order');
+    Route::get('/seller/orders/{order}', [DashboardController::class, 'showOrder'])->name('seller.show.order');
+});
+
+
