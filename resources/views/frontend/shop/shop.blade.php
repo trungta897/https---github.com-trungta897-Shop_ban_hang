@@ -16,12 +16,11 @@
         </div>
     </div>
 
-
     <div class="single-product-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-3 col-sm-12">
                     @foreach ($products as $product)
                         <div class="single-shop-product">
                             <div class="product-upper">

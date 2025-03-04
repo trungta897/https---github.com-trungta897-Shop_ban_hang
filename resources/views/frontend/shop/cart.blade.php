@@ -74,7 +74,7 @@
                                                 </td>
 
                                                 <td class="product-subtotal">
-                                                    <span class="amount">{{ $item->price * $item->quantity }} VND</span>
+                                                    <span class="amount">{{ number_format($item->price * $item->quantity) }} VND</span>
                                                 </td>
                                             </tr>
                                         @endforeach
