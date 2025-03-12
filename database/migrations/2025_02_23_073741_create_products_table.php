@@ -22,7 +22,6 @@ return new class extends Migration {
             $table->timestamp('created_at')->nullable();
 
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
-            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade');
         });
     }
 
