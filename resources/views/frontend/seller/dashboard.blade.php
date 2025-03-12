@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Mô tả</label>
-                        <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
+                        <textarea name="description" id="description" class="form-control" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="price">Giá</label>
@@ -47,15 +47,11 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Hình ảnh</label>
-                        <input type="file" name="image" id="image" class="form-control-file" required>
+                        <input type="file" name="image" id="image" class="form-control-file">
                     </div>
                     <div class="form-group">
                         <label for="category">Danh mục</label>
-                        <select name="category_id" id="category" class="form-control" required>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" id="category" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
                 </form>
