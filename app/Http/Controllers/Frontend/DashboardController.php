@@ -2,33 +2,31 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller as BaseController;
 use App\Models\OrderDetail;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class DashboardController extends Controller
+class DashboardController extends BaseController
 {
     // Hiển thị danh sách sản phẩm
     public function index()
-    {
-        $user = Auth::user();
-        $sellerOrders = $user->sellerOrders ?? collect();
-        $productIds = $sellerOrders->pluck('product_id')->all();
-        $products = Products::whereIn('id', $productIds)->get();
-        $orders = $sellerOrders;
-
-        // // Debug
-        // dump('User ID: ' . $user->id);
-        // dump('Seller Orders Count: ' . $sellerOrders->count());
-        // dump('Product IDs: ', $productIds);
-        // dump('Products Count: ' . $products->count());
-        // dump('Orders Count: ' . $orders->count());
-
-        return view('frontend.seller.dashboard', compact('products', 'orders'));
+{
+    $user = Auth::user();
+    $products = Products::where('seller_id', $user->id)->get(); // Directly get seller's products
+    $orders = $user->sellerOrders ?? collect();
+    $categories = Products::select('category')->distinct()->get();
+    if ($categories->isEmpty()) {
+        $categories = collect([['category' => 'Chưa có danh mục']]);
     }
+    $revenueData = $orders->groupBy(fn($order) => \Carbon\Carbon::parse($order->created_at)->format('Y-m'))
+                         ->map(fn($group) => $group->sum('total_price')); // Giả sử có total_price
+    $chartLabels = $revenueData->keys();
+    $chartData = $revenueData->values();
+    return view('frontend.seller.dashboard', compact('products', 'orders', 'chartLabels', 'chartData'));
+}
 
     // Hiển thị form thêm sản phẩm
     public function create()
@@ -51,6 +49,7 @@ class DashboardController extends Controller
         ]);
 
         $product = new Products();
+        $product->seller_id = Auth::id();
         $product->name = $request->name;
         $product->price = $request->price;
         $product->category = $request->category;
@@ -158,4 +157,6 @@ class DashboardController extends Controller
         $order = OrderDetail::where('seller_id', Auth::id())->findOrFail($orderId);
         return view('frontend.seller.order-details', compact('order'));
     }
+
+
 }
