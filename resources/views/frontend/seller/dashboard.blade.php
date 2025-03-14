@@ -34,16 +34,8 @@
                         <input type="text" name="name" id="name" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="description">Mô tả</label>
-                        <textarea name="description" id="description" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
                         <label for="price">Giá</label>
                         <input type="number" name="price" id="price" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Số lượng</label>
-                        <input type="number" name="quantity" id="quantity" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="image">Hình ảnh</label>
@@ -51,7 +43,26 @@
                     </div>
                     <div class="form-group">
                         <label for="category">Danh mục</label>
-                        <input type="text" id="category" class="form-control">
+                        <input type="text" name="category" id="category" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="featured">Sản phẩm nổi bật</label>
+                        <select name="featured" id="featured" class="form-control" required>
+                            <option value="1">Có</option>
+                            <option value="0">Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Số lượng sản phẩm có sẵn</label>
+                        <input type="number" name="quantity" id="quantity" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Nhãn hàng</label>
+                        <input type="text" name="brand_name" id="brand_name" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
                 </form>

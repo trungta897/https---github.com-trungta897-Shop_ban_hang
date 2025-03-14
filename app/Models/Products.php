@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\User;
 
 class Products extends Model
 {
@@ -32,4 +32,9 @@ class Products extends Model
 }
 
 public $timestamps = false;
+public function products()
+    {
+        return $this->hasMany(Products::class, 'seller_id');
+    }
+
 }
