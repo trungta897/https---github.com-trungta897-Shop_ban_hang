@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\DashboardController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -49,13 +50,11 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/seller/dashboard', [DashboardController::class, 'index'])->name('seller.dashboard');
-    Route::get('/seller/products/create', [DashboardController::class, 'create'])->name('seller.create');
+    Route::get('/seller/create', [DashboardController::class, 'create'])->name('seller.create');
     Route::post('/seller/products', [DashboardController::class, 'store'])->name('seller.store');
-    Route::get('/seller/products/{product}/edit', [DashboardController::class, 'edit'])->name('seller.edit');
-    Route::put('/seller/products/{product}', [DashboardController::class, 'update'])->name('seller.update');
-    Route::delete('/seller/products/{product}', [DashboardController::class, 'destroy'])->name('seller.destroy');
-    Route::put('/seller/orders/{order}', [DashboardController::class, 'updateOrder'])->name('seller.update.order');
-    Route::get('/seller/orders/{order}', [DashboardController::class, 'showOrder'])->name('seller.show.order');
+    Route::get('/seller/edit/{product}', [DashboardController::class, 'edit'])->name('seller.edit');
+    Route::put('/seller/update/{product}', [DashboardController::class, 'update'])->name('seller.update');
+    Route::delete('/seller/destroy/{product}', [DashboardController::class, 'destroy'])->name('seller.destroy');
+    Route::put('/seller/update-order/{orderId}', [DashboardController::class, 'updateOrder'])->name('seller.update.order');
+    Route::get('/seller/order/{orderId}', [DashboardController::class, 'showOrder'])->name('seller.show.order');
 });
-
-

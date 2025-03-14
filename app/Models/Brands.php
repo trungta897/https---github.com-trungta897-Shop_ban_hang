@@ -17,4 +17,6 @@ class Brands extends Model
     {
         return $this->hasMany(Products::class, 'brand_id', 'id');
     }
+
+    public $timestamps = false;
 }

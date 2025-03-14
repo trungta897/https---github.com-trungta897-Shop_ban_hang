@@ -2,7 +2,7 @@
 
 @section('title', 'Seller Dashboard')
 
-@section('content')
+@section('body')
 <div class="container">
     <h1 class="mt-4">Seller Dashboard</h1>
     <div class="row">
@@ -26,10 +26,45 @@
 
             <!-- Phần Thêm Sản Phẩm -->
             <div id="addProduct" class="mb-5">
-                <h2>Thêm Sản Phẩm</h2>
+                <h2>Thêm sản phẩm</h2>
                 <form action="{{ route('seller.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <!-- Form giữ nguyên -->
+                    <div class="form-group">
+                        <label for="name">Tên sản phẩm</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Giá</label>
+                        <input type="number" name="price" id="price" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Hình ảnh</label>
+                        <input type="file" name="image" id="image" class="form-control-file">
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Danh mục</label>
+                        <input type="text" name="category" id="category" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="featured">Sản phẩm nổi bật</label>
+                        <select name="featured" id="featured" class="form-control" required>
+                            <option value="1">Có</option>
+                            <option value="0">Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Số lượng sản phẩm có sẵn</label>
+                        <input type="number" name="quantity" id="quantity" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Nhãn hàng</label>
+                        <input type="text" name="brand_name" id="brand_name" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
                 </form>
             </div>
 
@@ -126,33 +161,3 @@
     </div>
 </div>
 @endsection
-
-{{-- @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('revenueChartCanvas').getContext('2d');
-            var revenueChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: @json($chartLabels),
-                    datasets: [{
-                        label: 'Doanh Thu (VND)',
-                        data: @json($chartData),
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1,
-                        fill: true
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-@endpush --}}

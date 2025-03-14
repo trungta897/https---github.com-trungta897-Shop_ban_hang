@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Products;
 
 class User extends Authenticatable
 {
@@ -21,7 +22,7 @@ class User extends Authenticatable
 
     public function products()
     {
-        return $this->hasMany(Products::class);
+        return $this->hasMany(Products::class, 'seller_id', 'id');
     }
 
     public function sellerOrders()
@@ -33,4 +34,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(OrderDetail::class, 'buyer_id');
     }
+    use Notifiable;
+
+
 }
