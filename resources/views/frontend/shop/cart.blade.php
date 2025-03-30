@@ -32,6 +32,7 @@
                                     <thead>
                                         <tr>
                                             <th class="product-remove">Remove</th>
+                                            <th class="product-thumbnail">Thumbnail</th>
                                             <th class="product-name">Product</th>
                                             <th class="product-price">Price</th>
                                             <th class="product-quantity">Quantity</th>
@@ -40,7 +41,6 @@
                                     </thead>
                                     <tbody>
                                         @foreach($cartItems as $item)
-                                        {{-- @dd($item) --}}
                                             <tr class="cart_item">
                                                 <td class="product-remove">
                                                     <form action="{{ route('cart.remove', $item->id) }}" method="POST">
@@ -52,9 +52,12 @@
 
                                                 <td class="product-thumbnail">
                                                     <a href="single-product.html">
-                                                        <img width="145" height="145" alt="{{ $item->product->name }}"
-                                                            class="shop_thumbnail" src="{{ $item->product->image }}">
+                                                        <img width="145" height="145"class="shop-thumbnail" src="{{ $item->product->image}}" alt="">
                                                     </a>
+                                                </td>
+
+                                                <td class="product-price">
+                                                    <span class="amount">{{ $item->product->name }}</span>
                                                 </td>
                                                 <td class="product-price">
                                                     <span class="amount">{{ number_format($item->price) }} VND</span>

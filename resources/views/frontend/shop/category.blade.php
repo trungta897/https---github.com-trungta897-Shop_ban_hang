@@ -30,7 +30,7 @@
                                     @foreach ($productsByCategory[$category] as $product)
                                         <div class="single-shop-product">
                                             <div class="product-upper">
-                                                <img src="{{$product->image}}" alt="">
+                                                <img src="storage/{{$product->image}}" alt="{{ $product->name }}">
                                             </div>
                                             <h2><a href="shop/product/{{$product->id}}">{{$product->name}}</a></h2>
                                             <div class="product-carousel-price">
