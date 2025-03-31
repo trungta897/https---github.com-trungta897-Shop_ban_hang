@@ -144,17 +144,17 @@
                             @foreach ($latestProducts as $latestProduct)
                                 <div class="single-product">
                                     <div class="product-f-image">
-                                        <img src="{{ $latestProduct->image }}" alt="">
+                                            @if ($latestProduct->image)
+                                                <img src="{{ asset('storage/' . $latestProduct->image) }}" alt="{{ $latestProduct->name }}" style="width: 250px;height:250px;">
+                                            @else
+                                            <p>Không có hình ảnh</p>
+                                        @endif
                                         <div class="product-hover">
-                                            <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>
-                                                Add to cart</a>
-                                            <a href="{{ route('product.show', $latestProduct->id) }}"
-                                                class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                            <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                            <a href="{{ route('product.show', $latestProduct->id) }}" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                         </div>
                                     </div>
-                                    <h2><a
-                                            href="{{ route('product.show', $latestProduct->id) }}">{{ $latestProduct->name }}</a>
-                                    </h2>
+                                    <h2><a href="{{ route('product.show', $latestProduct->id) }}">{{ $latestProduct->name }}</a></h2>
                                     <div class="product-carousel-price">
                                         <ins>{{ number_format($latestProduct->price) }} VND</ins>
                                     </div>

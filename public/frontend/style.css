@@ -670,8 +670,12 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
     width: 76px;
 }
 .product-name {
-    font-size: 25px;
-    margin-bottom: 20px;
+        width: 100%; /* Đảm bảo chiều rộng khớp với ảnh hoặc container cha */
+        max-width: 200px; /* Thay đổi giá trị này tùy theo chiều rộng thực tế của ảnh */
+        word-wrap: break-word; /* Ngắt từ dài nếu cần */
+        overflow-wrap: break-word; /* Tương tự, hỗ trợ thêm cho trình duyệt mới */
+        white-space: normal; /* Cho phép xuống dòng tự nhiên */
+        margin: 0 auto; /* Canh giữa nếu cần */
 }
 .product-inner-price {
     margin-bottom: 25px;

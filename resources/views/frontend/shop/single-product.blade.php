@@ -33,14 +33,13 @@
                             <div class="col-sm-6">
                                 <div class="product-images">
                                     <div class="product-main-img">
-                                        <img src="{{ $products->image}}" alt="">
+                                        <img src="storage/{{ $products->image}}" alt="">
                                     </div>
 
                                     <div class="product-gallery">
-
                                         @foreach ($products->productImages as $productImage)
-                                            <div class="pt active" data-imgbigurl="frontend/img/{{ $productImage->path }}">
-                                                <img src="frontend/img/{{ $productImage->path }}" alt="">
+                                            <div class="pt active" data-imgbigurl="storage/{{ $productImage->path }}">
+                                                <img src="storage/{{ $productImage->path }}" alt="">
                                             </div>
                                         @endforeach
                                     </div>

@@ -71,6 +71,9 @@
             <!-- Phần Quản Lý Đơn Hàng -->
             <div id="orders" class="mb-5">
                 <h2>Quản Lý Đơn Hàng</h2>
+                @if (session('success'))
+                    <div class="alert alert-success mt-3">{{ session('success') }}</div>
+                @endif
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -122,22 +125,21 @@
             <!-- Phần Quản Lý Sản Phẩm -->
             <div id="productList" class="mb-5">
                 <h2>Quản Lý Sản Phẩm</h2>
-                @if (session('success'))
-                    <div class="alert alert-success mt-3">{{ session('success') }}</div>
-                @endif
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Tên Sản Phẩm</th>
+                            <th>Ảnh sản phẩm</th>
+                            <th>Tên sản phẩm</th>
                             <th>Giá</th>
-                            <th>Hành Động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($products as $product)
                             <tr>
                                 <td>{{ $product->id }}</td>
+                                <td><a href="{{ route('product.show', $product->id) }}"><img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" style="width: 100px;"></a></td>
                                 <td>{{ $product->name }}</td>
                                 <td>{{ number_format($product->price) }} VND</td>
                                 <td>
