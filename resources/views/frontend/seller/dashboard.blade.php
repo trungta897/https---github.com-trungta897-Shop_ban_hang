@@ -71,6 +71,9 @@
             <!-- Phần Quản Lý Đơn Hàng -->
             <div id="orders" class="mb-5">
                 <h2>Quản Lý Đơn Hàng</h2>
+                @if (session('success'))
+                    <div class="alert alert-success mt-3">{{ session('success') }}</div>
+                @endif
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -122,9 +125,6 @@
             <!-- Phần Quản Lý Sản Phẩm -->
             <div id="productList" class="mb-5">
                 <h2>Quản Lý Sản Phẩm</h2>
-                @if (session('success'))
-                    <div class="alert alert-success mt-3">{{ session('success') }}</div>
-                @endif
                 <table class="table table-bordered">
                     <thead>
                         <tr>
