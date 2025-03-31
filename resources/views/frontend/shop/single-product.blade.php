@@ -135,25 +135,34 @@
                         </div>
 
 
-                        <div class="related-products-wrapper">
-                            <h2 class="related-products-title">Related Products</h2>
-                            <div class="related-products-carousel">
-                                <div class="single-product">
-                                    @foreach ($relatedProducts as $relatedProduct)
-                                        <div class="product-f-image">
-                                            <img src="{{ $products->image }}" alt="">
-                                            <div class="product-hover">
-                                                <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to
-                                                    cart</a>
-                                                <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-                                            </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="related-products-wrapper">
+                                        <h2 class="section-title">Related Products</h2>
+                                        <div class="product-carousel">
+                                            @foreach ($relatedProducts as $relatedProduct)
+                                                <div class="single-product">
+                                                    <div class="product-f-image">
+                                                        <img src="storage/{{ $products->image }}"
+                                                            alt="{{ $relatedProduct->name }}">
+                                                        <div class="product-hover">
+                                                            <a href="" class="add-to-cart-link"><i
+                                                                    class="fa fa-shopping-cart"></i> Add to
+                                                                cart</a>
+                                                            <a href="" class="view-details-link"><i class="fa fa-link"></i> See
+                                                                details</a>
+                                                        </div>
+                                                    </div>
+                                                    <h2><a href="shop/product/{{$products->id}}">{{ $relatedProduct->name }}</a>
+                                                    </h2>
+                                                    <div class="product-carousel-price">
+                                                        <ins>{{ number_format($relatedProduct->price) }} VND</ins>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        <h2><a href="shop/product/{{$products->id}}">{{ $relatedProduct->name }}</a></h2>
-                                        <div class="product-carousel-price">
-                                            <ins>{{ number_format($relatedProduct->price) }} VND</ins>
-                                        </div>
-                                    @endforeach
-
+                                    </div>
                                 </div>
                             </div>
                         </div>

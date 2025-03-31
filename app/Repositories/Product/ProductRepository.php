@@ -27,10 +27,10 @@ class ProductRepository extends BaseRepositories implements ProductRepositoryInt
     }
 
     public function getProductOnIndex($request) {
-
         $sortBy = $request->type ?? 'default';
-        $perPage = $request->show ?? 5;
-        $search = $request->search ??'';
+        $search = $request->search ?? '';
+        $page = $request->page ?? 1;
+        $perPage = 5; // Số sản phẩm hiển thị mỗi trang
 
         $products = $this->model->where('name', 'like', '%' . $search . '%');
 
@@ -57,10 +57,23 @@ class ProductRepository extends BaseRepositories implements ProductRepositoryInt
                 $products = $products->orderBy('id');
         }
 
-        $products = $products->paginate($perPage);
+        $totalProducts = $products->count();
+        $totalPages = ceil($totalProducts / $perPage);
 
-        $products->appends(['sort_by' => $sortBy, 'show' => $perPage, 'search' => $search]);
-        return $products;
+        // Lấy sản phẩm theo phân trang
+        $products = $products->skip(($page - 1) * $perPage)
+                           ->take($perPage)
+                           ->get();
+
+        // Thêm thông tin phân trang vào kết quả
+        $result = [
+            'products' => $products,
+            'currentPage' => (int)$page,
+            'totalPages' => $totalPages,
+            'totalProducts' => $totalProducts,
+            'hasMorePages' => $page < $totalPages
+        ];
+
+        return $result;
     }
 }
-
